@@ -79,4 +79,18 @@ class PolicyController extends Controller
         $policy->delete();
         return response()->json(['message' => 'Policy deleted successfully']);
     }
+
+    public function getDashboardData()
+{
+    $totalActivePolicies = Policy::where('status', 'active')->count();
+    $premiumsCollected = Policy::sum('premium_amount');
+    $expiringPolicies = Policy::where('end_date', '<=', now()->addDays(30))->count();
+
+    return response()->json([
+        'total_active_policies' => $totalActivePolicies,
+        'premiums_collected' => $premiumsCollected,
+        'policies_expiring_soon' => $expiringPolicies,
+    ]);
+}
+
 }

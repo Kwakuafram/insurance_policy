@@ -10,6 +10,7 @@ use App\Http\Controllers\API\PolicyController;
 
 
 
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
@@ -21,3 +22,6 @@ Route::get('/policies', [PolicyController::class, 'index']);
 Route::post('/policies', [PolicyController::class, 'store']);
 Route::put('/policies/{policy}', [PolicyController::class, 'update']);
 Route::delete('/policies/{policy}', [PolicyController::class, 'destroy']);
+Route::get('/dashboard-data', [PolicyController::class, 'getDashboardData']);
+
+
